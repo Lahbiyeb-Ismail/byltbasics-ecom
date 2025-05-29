@@ -1,0 +1,23 @@
+CREATE TABLE "products" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"gender" varchar(10) NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"route" varchar(255) NOT NULL,
+	"collections" varchar(255) NOT NULL,
+	"style" varchar(100),
+	"cut" varchar(100),
+	"neck" varchar(100),
+	"sleeve" varchar(100),
+	"fabric" varchar(100),
+	"price" integer NOT NULL,
+	"description" text,
+	"images" jsonb DEFAULT '[]'::jsonb NOT NULL,
+	"colors" jsonb DEFAULT '[]'::jsonb NOT NULL,
+	"sizes" jsonb DEFAULT '[]'::jsonb NOT NULL,
+	"stock" integer DEFAULT 0 NOT NULL,
+	"popularity" boolean DEFAULT false NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	CONSTRAINT "products_id_unique" UNIQUE("id"),
+	CONSTRAINT "products_route_unique" UNIQUE("route")
+);
