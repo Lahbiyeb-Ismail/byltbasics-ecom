@@ -50,6 +50,13 @@
       "when": 1748535559232,
       "tag": "0006_abnormal_professor_monster",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1748615044510,
+      "tag": "0007_slow_zarek",
+      "breakpoints": true
     }
   ]
 }
