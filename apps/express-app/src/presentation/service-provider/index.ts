@@ -3,6 +3,7 @@ import "reflect-metadata";
 
 import type { IApiResponseSanitizer, ICryptoProvider, ILogger } from "@/application/providers";
 import type { IAuthLoginController, IAuthRegisterController, IRefreshTokenController } from "@/presentation/controllers/auth";
+import type { IGetProductsByGenderController } from "@/presentation/controllers/product";
 
 import { container } from "@/infrastructure/di-container/container";
 import { TYPES } from "@/infrastructure/di-container/types";
@@ -25,4 +26,8 @@ export const authLoginController = container.get<IAuthLoginController>(
 
 export const refreshTokenController = container.get<IRefreshTokenController>(
   TYPES.RefreshTokenController,
+);
+
+export const getProductsByGenderController = container.get<IGetProductsByGenderController>(
+  TYPES.GetProductsByGenderController,
 );

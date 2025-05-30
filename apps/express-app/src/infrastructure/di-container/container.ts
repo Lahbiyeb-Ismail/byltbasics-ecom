@@ -2,16 +2,20 @@ import "reflect-metadata";
 import { Container } from "inversify";
 
 import type { IApiResponseSanitizer, ICryptoProvider, IJwtTokenProvider, ILogger } from "@/application/providers";
-import type { IRefreshTokenRepository, IUserRepository } from "@/application/repositories";
+import type { IProductRepository, IRefreshTokenRepository, IUserRepository } from "@/application/repositories";
 import type { IAuthLoginUseCase, IRefreshTokenUseCase } from "@/application/use-cases/auth";
+import type { IGetProductsByGenderUseCase } from "@/application/use-cases/product";
 import type { ICreateUserUseCase } from "@/application/use-cases/user";
 import type { IAuthLoginController, IAuthRegisterController, IRefreshTokenController } from "@/presentation/controllers/auth";
+import type { IGetProductsByGenderController } from "@/presentation/controllers/product";
 
 import { AuthLoginUseCase, RefreshTokenUseCase } from "@/application/use-cases/auth";
+import { GetProductsByGenderUseCase } from "@/application/use-cases/product";
 import { CreateUserUseCase } from "@/application/use-cases/user";
 import { ApiResponseSanitizer, CryptoProvider, JwtTokenProvider, Logger } from "@/infrastructure/providers";
-import { RefreshTokenRepository, UserRepository } from "@/infrastructure/repositories/drizzle";
+import { ProductRepository, RefreshTokenRepository, UserRepository } from "@/infrastructure/repositories/drizzle";
 import { AuthLoginController, AuthRegisterController, RefreshTokenController } from "@/presentation/controllers/auth";
+import { GetProductsByGenderController } from "@/presentation/controllers/product";
 
 import { TYPES } from "./types";
 
@@ -67,6 +71,18 @@ function bootstrapContainer() {
   container
     .bind<IRefreshTokenController>(TYPES.RefreshTokenController)
     .to(RefreshTokenController);
+
+  container
+    .bind<IProductRepository>(TYPES.ProductRepository)
+    .to(ProductRepository);
+
+  container
+    .bind<IGetProductsByGenderUseCase>(TYPES.GetProductsByGenderUseCase)
+    .to(GetProductsByGenderUseCase);
+
+  container
+    .bind<IGetProductsByGenderController>(TYPES.GetProductsByGenderController)
+    .to(GetProductsByGenderController);
 
   return container;
 }

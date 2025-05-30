@@ -11,4 +11,7 @@ export const TYPES = {
   RefreshTokenRepository: Symbol.for("RefreshTokenRepository"),
   RefreshTokenUseCase: Symbol.for("RefreshTokenUseCase"),
   RefreshTokenController: Symbol.for("RefreshTokenController"),
+  ProductRepository: Symbol.for("ProductRepository"),
+  GetProductsByGenderUseCase: Symbol.for("GetProductsByGenderUseCase"),
+  GetProductsByGenderController: Symbol.for("GetProductsByGenderController"),
 } as const;
