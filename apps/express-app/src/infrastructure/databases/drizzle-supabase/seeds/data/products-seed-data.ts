@@ -1,6 +1,25 @@
 // This file contains the transformed product data for seeding the database
 
 export const transformedData = {
+  genders: [
+    {
+      name: "Men",
+      slug: "men",
+    },
+    {
+      name: "Women",
+      slug: "women",
+    },
+  ],
+  categories: [
+    { name: "Tops", slug: "tops", description: "Shirts, t-shirts, and upper body clothing" },
+    { name: "Bottoms", slug: "bottoms", description: "Pants, shorts, and lower body clothing" },
+    { name: "Outerwear", slug: "outerwear", description: "Jackets, pullovers, and outer garments" },
+    { name: "Accessories", slug: "accessories", description: "Hats, belts, and accessories" },
+    { name: "Underwear", slug: "underwear", description: "Underwear and intimate apparel" },
+    { name: "Tops", slug: "tops", description: "Shirts, t-shirts, and upper body clothing" },
+    { name: "Bottoms", slug: "bottoms", description: "Pants, shorts, and lower body clothing" },
+  ],
   collections: [
     {
       name: "Mens Tops",

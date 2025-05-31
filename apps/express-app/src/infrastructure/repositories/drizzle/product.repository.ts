@@ -6,7 +6,7 @@ import { injectable } from "inversify";
 import type { IProductRepository } from "@/application/repositories";
 
 import db from "@/infrastructure/databases/drizzle-supabase";
-import { products } from "@/infrastructure/databases/drizzle-supabase/schemas";
+import { productTable } from "@/infrastructure/databases/drizzle-supabase/schemas";
 
 @injectable()
 export class ProductRepository implements IProductRepository {
@@ -18,6 +18,6 @@ export class ProductRepository implements IProductRepository {
    * @returns Promise resolving to an array of products matching the specified gender
    */
   async getProductsByGender(gender: ProductGender): Promise<IProduct[]> {
-    return db.select().from(products).where(eq(products.gender, gender));
+    return db.select().from(productTable).where(eq(productTable.gender, gender));
   }
 }

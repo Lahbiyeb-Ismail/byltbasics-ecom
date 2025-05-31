@@ -2,16 +2,16 @@ import type db from "../index";
 
 import {
   collections,
-  colors,
-  fabrics,
-  images,
-  productAttributes,
-  productCollections,
+  productAttributeTable,
+  productCollectionTable,
+  productColorTable,
   productFabrics,
+  productFabricTable,
   productImages,
-  products,
-  productVariants,
-  sizes,
+  productImageTable,
+  productSizeTable,
+  productTable,
+  productVariantTable,
 } from "../schemas";
 import { transformedData } from "./data/products-seed-data";
 
@@ -44,7 +44,7 @@ async function seedProductDatabase(db: db) {
       const insertedFabrics = await Promise.all(
         transformedData.fabrics.map(async (fabric) => {
           const result = await tx
-            .insert(fabrics)
+            .insert(productFabricTable)
             .values({
               name: fabric.name,
               description: fabric.description,
@@ -59,7 +59,7 @@ async function seedProductDatabase(db: db) {
       const insertedColors = await Promise.all(
         transformedData.colors.map(async (color) => {
           const result = await tx
-            .insert(colors)
+            .insert(productColorTable)
             .values({
               name: color.name,
               hexCode: color.hexCode,
@@ -75,7 +75,7 @@ async function seedProductDatabase(db: db) {
       const insertedSizes = await Promise.all(
         transformedData.sizes.map(async (size) => {
           const result = await tx
-            .insert(sizes)
+            .insert(productSizeTable)
             .values({
               name: size.name,
               sortOrder: size.sortOrder,
@@ -97,7 +97,7 @@ async function seedProductDatabase(db: db) {
       for (const product of transformedData.products) {
         // Insert product
         const insertedProduct = await tx
-          .insert(products)
+          .insert(productTable)
           .values({
             name: product.name,
             slug: product.slug,
@@ -116,7 +116,7 @@ async function seedProductDatabase(db: db) {
         if (product.attributes && product.attributes.length > 0) {
           await Promise.all(
             product.attributes.map(async (attr) => {
-              await tx.insert(productAttributes).values({
+              await tx.insert(productAttributeTable).values({
                 productId,
                 attributeName: attr.attributeName,
                 attributeValue: attr.attributeValue,
@@ -133,7 +133,7 @@ async function seedProductDatabase(db: db) {
               // Find collection by name
               const collection = insertedCollections.find(c => c.slug === collectionSlug);
               if (collection) {
-                await tx.insert(productCollections).values({
+                await tx.insert(productCollectionTable).values({
                   productId,
                   collectionId: collection.id,
                 });
@@ -165,7 +165,7 @@ async function seedProductDatabase(db: db) {
           const insertedImages = await Promise.all(
             product.images.map(async (imageData) => {
               const result = await tx
-                .insert(images)
+                .insert(productImageTable)
                 .values({
                   url: imageData.url,
                   altText: imageData.altText,
@@ -197,7 +197,7 @@ async function seedProductDatabase(db: db) {
               const sizeId = sizeMap.get(variant.sizeName);
 
               if (colorId && sizeId) {
-                await tx.insert(productVariants).values({
+                await tx.insert(productVariantTable).values({
                   productId,
                   colorId,
                   sizeId,
@@ -229,16 +229,16 @@ async function clearProductDatabase(db: db) {
     console.log("🧹 Clearing database...");
 
     // Delete in reverse order of dependencies
-    await db.delete(productVariants);
+    await db.delete(productVariantTable);
     await db.delete(productImages);
-    await db.delete(images);
+    await db.delete(productImageTable);
     await db.delete(productFabrics);
-    await db.delete(productCollections);
-    await db.delete(productAttributes);
-    await db.delete(products);
-    await db.delete(sizes);
-    await db.delete(colors);
-    await db.delete(fabrics);
+    await db.delete(productCollectionTable);
+    await db.delete(productAttributeTable);
+    await db.delete(productTable);
+    await db.delete(productSizeTable);
+    await db.delete(productColorTable);
+    await db.delete(productFabricTable);
     await db.delete(collections);
 
     console.log("✅ Database cleared successfully!");

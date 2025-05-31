@@ -64,6 +64,13 @@
       "when": 1748622248754,
       "tag": "0008_next_gideon",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1748701899204,
+      "tag": "0009_elite_magma",
+      "breakpoints": true
     }
   ]
 }
